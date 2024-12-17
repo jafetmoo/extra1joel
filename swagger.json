@@ -1,0 +1,184 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Clientes Descuento Nav y Comida Fav",
+      "description": "API para gestionar clientes.",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/api/clientes": {
+        "get": {
+          "summary": "Obtiene la lista de clientes",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Número de página para paginación",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Número máximo de resultados por página",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 30
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista de clientes obtenida correctamente",
+              "content": {
+                "application/json": {
+                  "example": [
+                    {
+                      "id_cliente": 1,
+                      "nombre": "Juan Pérez",
+                      "telefono": "123456789",
+                      "correo": "juan@example.com",
+                      "direccion": "Calle 123, Ciudad",
+                      "descuento_navideno": "15.50",
+                      "comida_favorita": "Pizza"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crear un nuevo cliente",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "example": {
+                  "nombre": "Carlos Fernández",
+                  "telefono": "987654321",
+                  "correo": "carlos@example.com",
+                  "direccion": "Calle 456, Ciudad",
+                  "descuento_navideno": "10.00",
+                  "comida_favorita": "Hamburguesa"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Cliente creado exitosamente",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id_cliente": 1,
+                    "nombre": "Carlos Fernández",
+                    "telefono": "987654321",
+                    "correo": "carlos@example.com",
+                    "direccion": "Calle 456, Ciudad",
+                    "descuento_navideno": "10.00",
+                    "comida_favorita": "Hamburguesa"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Error al crear cliente"
+            }
+          }
+        }
+      },
+      "/api/clientes/{id}": {
+        "put": {
+          "summary": "Actualizar un cliente existente",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID del cliente",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "example": {
+                  "nombre": "Carlos Fernández",
+                  "telefono": "987654321",
+                  "correo": "carlos@example.com",
+                  "direccion": "Calle 456, Ciudad",
+                  "descuento_navideno": "15.00",
+                  "comida_favorita": "Pizza"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cliente actualizado exitosamente",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id_cliente": 1,
+                    "nombre": "Carlos Fernández",
+                    "telefono": "987654321",
+                    "correo": "carlos@example.com",
+                    "direccion": "Calle 456, Ciudad",
+                    "descuento_navideno": "15.00",
+                    "comida_favorita": "Pizza"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Cliente no encontrado"
+            },
+            "500": {
+              "description": "Error al actualizar cliente"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar un cliente",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID del cliente",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Cliente eliminado correctamente",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Cliente eliminado correctamente"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Cliente no encontrado"
+            },
+            "500": {
+              "description": "Error al eliminar cliente"
+            }
+          }
+        }
+      }
+    }
+  }
+  
